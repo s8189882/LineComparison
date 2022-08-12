@@ -65,9 +65,24 @@ public class LineCompare {
 		Double d1 = new Double(lengthLine1);
 		Double d2 = new Double(lengthLine2);
 		if (d1.equals(d2))
-            System.out.print("Line 1 and line 2 have Equal lengths.");
+            System.out.println("Line 1 and line 2 have Equal lengths.");
         else
-            System.out.print("Line 1 and Line 2 do not have Equal lengths.");
+            System.out.println("Line 1 and Line 2 do not have Equal lengths.");
+		
+		
+		
+		//compare two lines based on the end points, So that I know one line is equal, greater or less than the other line.
+		if ((Double.compare(lengthLine1, lengthLine2)) == 0) 
+			System.out.println("Length of Line 1 is equal to the length of Line 2.");
+			else 
+				if ((Double.compare(lengthLine1, lengthLine2)) < 0) 
+					System.out.println("Length of Line 1 is less than the length of Line 2.");
+				else
+					if ((Double.compare(lengthLine1, lengthLine2)) > 0) 
+						System.out.println("Length of Line 1 is greater than the length of Line 2.");
+
+			
+		
 	}
 
 }
