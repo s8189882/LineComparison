@@ -16,16 +16,12 @@ public class LineCompare {
 		int line2y2 = 0;
 		double lengthLine1 = 0.0;
 		double lengthLine2 = 0.0;
-
-
 		
-		//Start with Displaying Welcome to Line Comparison Computation Program on Master Branch
 		System.out.println("Welcome to the Line Comparison Computation Program ");
 		
-		
-		
-		
-		//model a line based on a point consisting of (x, y) co-ordinates using the Cartesian system, and calculate its length
+		Line line1 = new Line();
+		Line line2 = new Line();	
+		LineCompare lineObject = new LineCompare();
 		Scanner sc = new Scanner(System.in);
 		
 		System.out.println();
@@ -40,9 +36,8 @@ public class LineCompare {
 		line1x2 = sc.nextInt();
 		System.out.println("Enter the ordinate (y-coordinate) : ");
 		line1y2 = sc.nextInt();
-		
-		lengthLine1 = Math.sqrt((Math.pow((line1x2-line1x1), 2)+Math.pow((line1y2-line1y1), 2)));
-		System.out.println("Length of Line 1 is : " + lengthLine1);
+		line1.setStartCoordinates(line1x1, line1y1);
+		line1.setEndCoordinates(line1x2, line1y2);
 		
 		System.out.println();
 		System.out.println("Using the Cartesian Coordinate System, enter the endpoints of the Line 2");
@@ -56,33 +51,51 @@ public class LineCompare {
 		line2x2 = sc.nextInt();
 		System.out.println("Enter the ordinate (y-coordinate) : ");
 		line2y2 = sc.nextInt();
+		line2.setStartCoordinates(line2x1, line2y1);
+		line2.setEndCoordinates(line2x2, line2y2);
 		
-		lengthLine2 = Math.sqrt((Math.pow((line2x2-line2x1), 2)+Math.pow((line2y2-line2y1), 2)));
-		System.out.println("Length of Line 2 is : " + lengthLine2);
+		lengthLine1 = lineObject.calculateLength(line1);
+		lengthLine2 = lineObject.calculateLength(line2);
 		
-				
-		//check equality of two lines based on the end points, whether two lines are the equal
-		Double d1 = new Double(lengthLine1);
-		Double d2 = new Double(lengthLine2);
-		if (d1.equals(d2))
+		lineObject.display(lengthLine1, lengthLine2);
+		lineObject.checkEqualLengths(lengthLine1, lengthLine2);
+		lineObject.compareLengths(lengthLine1, lengthLine2);		
+		
+		sc.close();	
+	}
+	
+	public double calculateLength(Line line) {
+		int x1 = line.getStartCoordinates().getxCoordinate();
+		int y1 = line.getStartCoordinates().getyCoordinate();
+		int x2 = line.getEndCoordinates().getxCoordinate();
+		int y2 = line.getEndCoordinates().getyCoordinate();
+		
+		return (Math.sqrt((Math.pow((x2-x1), 2)+Math.pow((y2-y1), 2))));
+	}
+	
+	public void checkEqualLengths(double lengthA, double lengthB) {
+		System.out.println();
+		if (lengthA == lengthB)
             System.out.println("Line 1 and line 2 have Equal lengths.");
         else
             System.out.println("Line 1 and Line 2 do not have Equal lengths.");
-		
-		
-		
-		//compare two lines based on the end points, So that I know one line is equal, greater or less than the other line.
-		if ((Double.compare(lengthLine1, lengthLine2)) == 0) 
-			System.out.println("Length of Line 1 is equal to the length of Line 2.");
-			else 
-				if ((Double.compare(lengthLine1, lengthLine2)) < 0) 
-					System.out.println("Length of Line 1 is less than the length of Line 2.");
-				else
-					if ((Double.compare(lengthLine1, lengthLine2)) > 0) 
-						System.out.println("Length of Line 1 is greater than the length of Line 2.");
-
-			
-		
 	}
 
+	public void compareLengths(double lengthA, double lengthB) {
+		System.out.println();
+		if ((Double.compare(lengthA, lengthB)) == 0) 
+			System.out.println("Length of Line 1 is equal to the length of Line 2.");
+			else 
+				if ((Double.compare(lengthA, lengthB)) < 0) 
+					System.out.println("Length of Line 1 is less than the length of Line 2.");
+				else
+					if ((Double.compare(lengthA, lengthB)) > 0) 
+						System.out.println("Length of Line 1 is greater than the length of Line 2.");			
+	}
+	
+	public void display(double lengthA, double lengthB) {
+		System.out.println();
+		System.out.println("Length of Line 1 is : " + lengthA);
+		System.out.println("Length of Line 2 is : " + lengthB);
+	}
 }
